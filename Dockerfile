@@ -23,4 +23,7 @@ COPY --from=builder /app/caddy/cmd/caddy/caddy /app/caddy
 EXPOSE 8080/tcp
 EXPOSE 8443/tcp
 
-ENTRYPOINT [ "/app/caddy" ]
+ENV XDG_CONFIG_HOME /config
+ENV XDG_DATA_HOME /data
+
+ENTRYPOINT [ "/app/caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
